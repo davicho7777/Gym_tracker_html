@@ -36,3 +36,44 @@ Enhance and expand the functionality of this project by:
 4. **Testing and Deployment**:
    - Perform cross-browser and cross-device testing.
    - Deploy to a web hosting service.
+
+# Registro de Ejercicios Mensual
+
+Este proyecto es una herramienta simple y fácil de modificar basada en HTML para seguir tus rutinas de ejercicio mensuales. Diseñada con una interfaz limpia e intuitiva, esta herramienta te permite registrar tus entrenamientos, ver el progreso semanal e imprimir tus datos. Ideal para entusiastas del fitness que buscan una forma sencilla de monitorear sus hábitos de ejercicio.
+
+## Características
+
+- **Navegación Semanal**: Cambia entre semanas con facilidad.
+- **Guardado de Progreso**: Guarda tus datos de ejercicio localmente en el navegador.
+- **Imprimir Datos**: Imprime tus registros para revisarlos sin conexión.
+- **Ejercicios Editables**: Edita los nombres de los ejercicios a través de una interfaz modal.
+- **Diseño Responsivo**: Optimizado para dispositivos de escritorio y móviles.
+
+## Cómo Empezar
+
+Para comenzar a usar el Registro de Ejercicios Mensual:
+
+1. **Clonar o Descargar**: Obtén el archivo `index.html` de este repositorio.
+2. **Abrir en el Navegador**: Abre `index.html` en tu navegador web para comenzar a registrar tus ejercicios.
+
+## Próximos Pasos
+
+Mejora y expande la funcionalidad de este proyecto:
+
+1. **Agregar Soporte Backend**:
+   - Implementa un backend para guardar datos en diferentes dispositivos.
+   - Integra autenticación de usuario para seguimiento personalizado.
+
+2. **Mejorar la Interfaz de Usuario**:
+   - Usa frameworks de JavaScript como React o Vue.js para actualizaciones dinámicas.
+   - Aplica frameworks de CSS como Bootstrap para un aspecto moderno.
+
+3. **Características Avanzadas**:
+   - Integra gráficos y tablas para un seguimiento visual del progreso.
+   - Añade funciones de establecimiento y seguimiento de metas para mejor motivación.
+
+4. **Pruebas y Despliegue**:
+   - Realiza pruebas en diferentes navegadores y dispositivos.
+   - Despliega en un servicio de hosting web.
+
+
