@@ -250,25 +250,25 @@
         <!-- Botón para solicitar número y enviar mensaje -->
         <button onclick="enviarTelegram()">Enviar Datos por Telegram</button>
 
-        <script>
-            function enviarTelegram() {
-                // Solicita el número de teléfono al usuario
-                const numeroTelefono = prompt("Introduce el número de teléfono al que deseas enviar el mensaje:");
+<button onclick="enviarTelegram()">Enviar Datos por Telegram</button>
 
-                // Verifica que el usuario haya introducido un número
-                if (numeroTelefono) {
-                    // Llama al servidor de la Raspberry Pi en el puerto 3000
-                    fetch(`http://localhost:3000/send_telegram?phone=${encodeURIComponent(numeroTelefono)}`)
-                        .then(response => response.text())
-                        .then(data => alert("Mensaje enviado: " + data))
-                        .catch(error => console.error("Error al enviar mensaje:", error));
-                } else {
-                    alert("Número de teléfono no proporcionado.");
-                }
-            }
-        </script>
-    </div>
-</body>
+<script>
+    function enviarTelegram() {
+        // Solicita el número de teléfono al usuario
+        const numeroTelefono = prompt("Introduce el número de teléfono al que deseas enviar el mensaje:");
+
+        // Verifica que el usuario haya introducido un número
+        if (numeroTelefono) {
+            // Llama al servidor de la Raspberry Pi en el puerto 3000
+            fetch(`http://localhost:3000/send_telegram?phone=${encodeURIComponent(numeroTelefono)}`)
+                .then(response => response.text())
+                .then(data => alert("Mensaje enviado: " + data))
+                .catch(error => console.error("Error al enviar mensaje:", error));
+        } else {
+            alert("Número de teléfono no proporcionado.");
+        }
+    }
+</script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const exerciseTable = document.getElementById('exercise-table');
