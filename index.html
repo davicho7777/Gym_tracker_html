@@ -242,7 +242,15 @@
             <button id="save-exercise-name">Guardar</button>
         </div>
     </div>
-
+<button onclick="enviarTelegram()">Imprimir y Enviar Datos</button>
+<script>
+  function enviarTelegram() {
+    fetch('http://localhost:3000/send_telegram')
+      .then(response => response.text())
+      .then(data => console.log(data))
+      .catch(error => console.error("Error al enviar mensaje:", error));
+  }
+</script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const exerciseTable = document.getElementById('exercise-table');
