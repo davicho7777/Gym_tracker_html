@@ -114,7 +114,7 @@
 
     <script>
         // Check if user is already logged in
-        if (localStorage.getItem('currentUser')) {
+        if (sessionStorage.getItem('currentUser')) {
             window.location.href = 'index.html';
         }
 
@@ -131,26 +131,61 @@
             }
         }
 
-        function handleLogin(event) {
+        async function loadUsers() {
+            try {
+                const response = await fetch('users.json');
+                const data = await response.json();
+                return data.users || {};
+            } catch (error) {
+                console.error('Error loading users:', error);
+                return {};
+            }
+        }
+
+        async function saveUsers(users) {
+            try {
+                const response = await fetch('save_users.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ users: users })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to save users');
+                }
+            } catch (error) {
+                console.error('Error saving users:', error);
+                alert('Error al guardar los datos del usuario');
+            }
+        }
+
+        async function handleLogin(event) {
             event.preventDefault();
             const username = document.getElementById('loginUsername').value;
             const password = document.getElementById('loginPassword').value;
             const errorDiv = document.getElementById('loginError');
             
-            // Get users from localStorage
-            const users = JSON.parse(localStorage.getItem('users')) || {};
-            
-            if (users[username] && users[username].password === password) {
-                localStorage.setItem('currentUser', username);
-                window.location.href = 'index.html';
-            } else {
-                errorDiv.textContent = 'Usuario o contraseña incorrectos';
+            try {
+                const users = await loadUsers();
+                
+                if (users[username] && users[username].password === password) {
+                    sessionStorage.setItem('currentUser', username);
+                    window.location.href = 'index.html';
+                } else {
+                    errorDiv.textContent = 'Usuario o contraseña incorrectos';
+                    errorDiv.style.display = 'block';
+                }
+            } catch (error) {
+                errorDiv.textContent = 'Error al iniciar sesión';
                 errorDiv.style.display = 'block';
             }
+            
             return false;
         }
 
-        function handleRegister(event) {
+        async function handleRegister(event) {
             event.preventDefault();
             const username = document.getElementById('registerUsername').value;
             const password = document.getElementById('registerPassword').value;
@@ -163,27 +198,32 @@
                 return false;
             }
             
-            // Get existing users or initialize empty object
-            const users = JSON.parse(localStorage.getItem('users')) || {};
-            
-            if (users[username]) {
-                errorDiv.textContent = 'El usuario ya existe';
+            try {
+                const users = await loadUsers();
+                
+                if (users[username]) {
+                    errorDiv.textContent = 'El usuario ya existe';
+                    errorDiv.style.display = 'block';
+                    return false;
+                }
+                
+                // Add new user
+                users[username] = {
+                    password: password,
+                    dateCreated: new Date().toISOString()
+                };
+                
+                // Save updated users
+                await saveUsers(users);
+                
+                // Automatically log in the new user
+                sessionStorage.setItem('currentUser', username);
+                window.location.href = 'index.html';
+                
+            } catch (error) {
+                errorDiv.textContent = 'Error al registrar el usuario';
                 errorDiv.style.display = 'block';
-                return false;
             }
-            
-            // Add new user
-            users[username] = {
-                password: password,
-                dateCreated: new Date().toISOString()
-            };
-            
-            // Save updated users object
-            localStorage.setItem('users', JSON.stringify(users));
-            
-            // Automatically log in the new user
-            localStorage.setItem('currentUser', username);
-            window.location.href = 'index.html';
             
             return false;
         }
